@@ -1,16 +1,38 @@
 # French-Reduced-Word-Embedding
 
-This repository contains the implementation of a project that compresses and improves word embeddings for the French language. Using FacebookAI's FastText embeddings as the baseline, we apply an AutoEncoder to reduce their size by 10 times and then fine-tune the compressed embeddings for enhanced performance.
+This project explores the reduction and fine-tuning of high-dimensional word embeddings to achieve computational efficiency while preserving semantic integrity. Using FacebookAI's FastText embeddings as the baseline, we developed a pipeline to compress French word embeddings from 300 to 30 dimensions through AutoEncoder architectures and refined them with Word2Vec-based fine-tuning.
 
-## Overview
+## Project Overview
 
-Word embeddings are critical for a variety of natural language processing tasks. However, high-dimensional embeddings can be computationally expensive and memory-intensive. This project addresses this challenge by:
+### Objectives
+1. **Compression**: Achieve a 10x reduction in the dimensionality of embeddings using AutoEncoder architectures.
+2. **Fine-Tuning**: Enhance the semantic quality of compressed embeddings with a Word2Vec model trained on tailored Skip-gram pairs.
+3. **Evaluation**: Validate the embeddings through metrics such as cosine similarity and visualization techniques.
 
-1. Compressing FacebookAI's FastText embeddings for French using an AutoEncoder. Current FastText state-of-the-art is 300 dimensions. The goal is to make it 30 dimensions.
-2. Fine-tuning the reduced embeddings on new data to improve their performance.
+### Methodology
+- **AutoEncoder Design**: We experimented with a two-layer AutoEncoder, optimizing hyperparameters (e.g., hidden layer dimensions, learning rate, batch size) to balance reduction efficiency and semantic quality.
+- **Data Engineering**: 
+  - Processed a French Wikipedia corpus with SpaCy.
+  - Generated Skip-gram word pairs for training, focusing on contextual integrity despite limitations in phrase segmentation.
+- **Fine-Tuning**:
+  - Employed a Word2Vec architecture to refine the reduced embeddings.
+  - Tackled computational constraints by limiting vocabulary size and applying optimization techniques like early stopping and learning-rate scheduling.
+- **Evaluation**:
+  - Compared embeddings using cosine similarity for semantic closeness.
+  - Applied PCA for visualizing cluster formations within the reduced embeddings.
 
-## Goals
+### Results
+1. **Reduction**: Achieved a promising 10x dimensionality reduction with the AutoEncoder while retaining a significant portion of semantic quality.
+2. **Fine-Tuning**: Refined embeddings exhibited meaningful improvements in specific clusters but did not surpass the original 300-dimensional embeddings in overall complexity.
+3. **Insights**: Smaller reduction factors (e.g., 5x) may provide better results with enhanced fine-tuning and computational resources.
 
-1. **Compression**: Reduce the size of the FastText embeddings by a factor of 5 or 10 while preserving semantic quality.
-2. **Fine-Tuning**: Enhance the compressed embeddings using additional training data.
-3. **Evaluation**: Compare the compressed and fine-tuned embeddings against the original to potentially improvie quality.
+### Observations
+- Cluster visualizations highlighted the potential for capturing semantic relationships even in reduced dimensions, though some structural fidelity was lost.
+- Limitations in training data size and hardware resources constrained the scope of fine-tuning and evaluation.
+
+### Future Directions
+- Explore smaller reduction ratios to balance dimensionality and performance.
+- Increase training corpus size and computational capacity to fully realize the potential of fine-tuning.
+- Expand evaluation to real-world NLP benchmarks for comprehensive validation.
+
+This project demonstrates the feasibility of significant dimensionality reduction while retaining semantic information, offering a pathway to computationally efficient NLP solutions.
