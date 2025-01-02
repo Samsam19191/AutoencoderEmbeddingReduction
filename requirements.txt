@@ -1,0 +1,7 @@
+fasttext
+numpy
+scikit-learn
+torch
+matplotlib
+wikipedia-api
+spacy
